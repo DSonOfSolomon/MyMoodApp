@@ -8,6 +8,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import repository.MoodHistory;
 
+import model.Emotions;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

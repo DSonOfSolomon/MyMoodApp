@@ -1,5 +1,6 @@
 package moodchecker;
 
+import analytics.MoodAnalytics;
 import controller.MoodController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
