@@ -4,21 +4,21 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import model.Emotions;
 import moodchecker.MoodApp;
+import service.MoodResponses;
 
 import java.util.List;
 
 public class MoodController {
 
-    private final ComboBox<Emotions> dropdown;
+    private final ComboBox<com.example.helloMood.Emotions> dropdown;
     private final Label resultLabel;
     private final VBox historyContent; // VBox for color-coded history
     private final Label greetingLabel;
     private final VBox root;
     private final MoodResponses moodResponses;
 
-    public MoodController(ComboBox<Emotions> dropdown,
+    public MoodController(ComboBox<com.example.helloMood.Emotions> dropdown,
                           Label resultLabel,
                           VBox historyContent,
                           Label greetingLabel,
@@ -32,7 +32,7 @@ public class MoodController {
     }
 
     public void handleSubmit() {
-        Emotions emotion = dropdown.getValue();
+        com.example.helloMood.Emotions emotion = dropdown.getValue();
         if (emotion == null) {
             resultLabel.setText("Please select an emotion.");
             resultLabel.setTextFill(Color.RED);
@@ -81,11 +81,11 @@ public class MoodController {
             String[] parts = line.split(" - ");
             if (parts.length == 3) {
                 String moodPart = parts[2].trim();
-                for (Emotions e : Emotions.values()) {
+                for (com.example.helloMood.Emotions e : com.example.helloMood.Emotions.values()) {
                     if (moodPart.startsWith(e.getEmoji())) {
-                        if (e == Emotions.HAPPY || e == Emotions.CALM || e == Emotions.MOTIVATED || e == Emotions.HOPEFUL) {
+                        if (e == com.example.helloMood.Emotions.HAPPY || e == com.example.helloMood.Emotions.CALM || e == com.example.helloMood.Emotions.MOTIVATED || e == com.example.helloMood.Emotions.HOPEFUL) {
                             entryLabel.setTextFill(Color.LIGHTGREEN);
-                        } else if (e == Emotions.INDIFFERENT) {
+                        } else if (e == com.example.helloMood.Emotions.INDIFFERENT) {
                             entryLabel.setTextFill(Color.ORANGE);
                         } else {
                             entryLabel.setTextFill(Color.RED);
@@ -99,7 +99,7 @@ public class MoodController {
         }
     }
 
-    private Color getColor(Emotions emotion) {
+    private Color getColor(com.example.helloMood.Emotions emotion) {
         return switch (emotion) {
             case HAPPY, CALM, MOTIVATED, HOPEFUL -> Color.LIGHTGREEN;
             case INDIFFERENT -> Color.ORANGE;

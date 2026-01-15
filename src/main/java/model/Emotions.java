@@ -1,35 +1,23 @@
-package model;
+package com.example.helloMood;
 
-public enum Emotions {
-
-    //Positive emotions
+public enum Emotions{
     HAPPY("😊"),
     CALM("😌"),
     MOTIVATED("💪"),
     HOPEFUL("🌟"),
-
-    //Neutral emotions
-    INDIFFERENT("😐"),
-
-    //Negative emotions
     SAD("😢"),
     ANXIOUS("😰"),
-    IRRITABLE("😒"),
+    IRRITABLE("😠"),
     TIRED("😴"),
-    OVERWHELMED("");
+    INDIFFERENT("😐"),
+    OVERWHELMED("😵");
 
-
-    //The emoji associated with the emotion
     private final String emoji;
 
-    //Constructor
     Emotions(String emoji) {
         this.emoji = emoji;
     }
 
-    /**
-     * @return Emoji string
-     */
     public String getEmoji() {
         return emoji;
     }
@@ -37,9 +25,9 @@ public enum Emotions {
     @Override
     public String toString() {
         String lower = name().toLowerCase();
-        return Character.toUpperCase(lower.charAt(0))
-                + lower.substring(1) + " " + emoji;
+        return Character.toUpperCase(lower.charAt(0)) + lower.substring(1) + " " + emoji;
     }
 }
+
 
 
