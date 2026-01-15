@@ -14,7 +14,7 @@ public class MoodHistory {
     private static final String HISTORY_FILE = "mood_history.txt";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public static void save(String timeOfDay, com.example.helloMood.Emotions emotion) {
+    public static void save(String timeOfDay, model.Emotions emotion) {
         String timestamp = LocalDateTime.now().format(FORMATTER);
         String entry = timestamp + " - " + timeOfDay + " - " + emotion.getEmoji() + " " + capitalize(emotion.name());
 

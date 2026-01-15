@@ -1,4 +1,4 @@
-package com.example.helloMood;
+package model;
 
 public enum Emotions{
     HAPPY("😊"),

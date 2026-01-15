@@ -1,5 +1,6 @@
 package moodchecker;
 
+import controller.MoodController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,6 +14,8 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import model.Emotions;
+import repository.MoodHistory;
 
 import java.time.LocalTime;
 //import java.util.List;
