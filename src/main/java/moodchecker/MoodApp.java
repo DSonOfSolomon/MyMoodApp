@@ -19,7 +19,7 @@ import model.Emotions;
 import repository.MoodHistory;
 
 import java.time.LocalTime;
-//import java.util.List;
+import java.util.List;
 
 public class MoodApp extends Application {
 
@@ -86,7 +86,7 @@ public class MoodApp extends Application {
         ScrollPane historyScroll = new ScrollPane(historyContent);
         historyScroll.setPrefSize(400, 150);
         historyScroll.setFitToWidth(true);
-        historyScroll.setStyle("-fx-background-color: transparent; -fx-background: rgba(0,0,0,0.3);");
+        historyScroll.setStyle("-fx-background-color: transparent; -fx-background: RGBA(0,0,0,0.3);");
         historyScroll.setVisible(false); // hidden by default
 
         // Load existing history
