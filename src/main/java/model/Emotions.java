@@ -5,7 +5,7 @@ public enum Emotions {
     //Positive emotions
     HAPPY("😊"),
     CALM("😌"),
-    MOTIVATE("💪"),
+    MOTIVATED("💪"),
     HOPEFUL("🌟"),
 
     //Neutral emotions
