@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import java.time.LocalTime;
 //import java.util.List;
 
-public class MyMoodApp extends Application {
+public class MoodApp extends Application {
 
     public static void main(String[] args) {
         launch(args);

@@ -3,75 +3,107 @@ package controller;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import service.MoodService;
+import javafx.scene.paint.Color;
 import model.Emotions;
+import moodchecker.MoodApp;
 
 import java.util.List;
-
 
 public class MoodController {
 
     private final ComboBox<Emotions> dropdown;
     private final Label resultLabel;
-    private final VBox historyContent;
+    private final VBox historyContent; // VBox for color-coded history
     private final Label greetingLabel;
     private final VBox root;
-
-    private final MoodService service;
+    private final MoodResponses moodResponses;
 
     public MoodController(ComboBox<Emotions> dropdown,
                           Label resultLabel,
                           VBox historyContent,
                           Label greetingLabel,
-                          VBox root,
-                          MoodService service) {
+                          VBox root) {
         this.dropdown = dropdown;
         this.resultLabel = resultLabel;
         this.historyContent = historyContent;
         this.greetingLabel = greetingLabel;
         this.root = root;
-        this.service = service;
+        this.moodResponses = new MoodResponses();
     }
 
-    /** Handle submit button click */
     public void handleSubmit() {
         Emotions emotion = dropdown.getValue();
         if (emotion == null) {
             resultLabel.setText("Please select an emotion.");
-            resultLabel.setStyle("-fx-text-fill: red;");
+            resultLabel.setTextFill(Color.RED);
             return;
         }
 
-        // Delegate business logic to service
-        String response = service.processMood(emotion);
+        String timeOfDay = MoodApp.getTimeOfDay();
+        String response = moodResponses.get(timeOfDay, emotion);
+
+        if (response == null) {
+            resultLabel.setText("No response found.");
+            resultLabel.setTextFill(Color.RED);
+            return;
+        }
+
         resultLabel.setText(response);
-        resultLabel.setStyle("-fx-text-fill: " + toHex(service.getEmotionColor(emotion)) + ";");
+        resultLabel.setTextFill(getColor(emotion));
+
+        // Save mood with timestamp
+        MoodHistory.save(timeOfDay, emotion);
 
         // Refresh history display
         refreshHistory();
 
         // Update greeting & background dynamically
-        greetingLabel.setText(service.getGreeting());
-        root.setBackground(service.getBackground());
+        greetingLabel.setText(MoodApp.getGreeting(timeOfDay));
+        root.setBackground(MoodApp.getBackground(timeOfDay));
     }
 
-    /** Handle clear button click */
     public void handleClear() {
-        service.clearHistory();
+        MoodHistory.clear();
         historyContent.getChildren().clear();
     }
 
-    /** Refresh history VBox */
+    // Refresh history with color-coded lines
     public void refreshHistory() {
-        List<Label> labels = service.getHistoryLabels();
-        historyContent.getChildren().setAll(labels);
+        List<String> historyList = MoodHistory.load();
+        historyContent.getChildren().clear(); // clear previous entries
+
+        for (String line : historyList) {
+            Label entryLabel = new Label("• " + line);
+            entryLabel.setWrapText(true);
+            entryLabel.setMaxWidth(400);
+
+            // Extract the mood emoji from the line
+            String[] parts = line.split(" - ");
+            if (parts.length == 3) {
+                String moodPart = parts[2].trim();
+                for (Emotions e : Emotions.values()) {
+                    if (moodPart.startsWith(e.getEmoji())) {
+                        if (e == Emotions.HAPPY || e == Emotions.CALM || e == Emotions.MOTIVATED || e == Emotions.HOPEFUL) {
+                            entryLabel.setTextFill(Color.LIGHTGREEN);
+                        } else if (e == Emotions.INDIFFERENT) {
+                            entryLabel.setTextFill(Color.ORANGE);
+                        } else {
+                            entryLabel.setTextFill(Color.RED);
+                        }
+                        break;
+                    }
+                }
+            }
+
+            historyContent.getChildren().add(entryLabel);
+        }
     }
 
-    /** Convert JavaFX Color to CSS hex string for inline styling */
-    private String toHex(javafx.scene.paint.Color color) {
-        int r = (int) (color.getRed() * 255);
-        int g = (int) (color.getGreen() * 255);
-        int b = (int) (color.getBlue() * 255);
-        return String.format("#%02x%02x%02x", r, g, b);
+    private Color getColor(Emotions emotion) {
+        return switch (emotion) {
+            case HAPPY, CALM, MOTIVATED, HOPEFUL -> Color.LIGHTGREEN;
+            case INDIFFERENT -> Color.ORANGE;
+            default -> Color.RED;
+        };
     }
 }
