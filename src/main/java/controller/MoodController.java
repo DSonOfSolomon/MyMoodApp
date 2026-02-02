@@ -72,7 +72,7 @@ public class MoodController {
     // Refresh history with color-coded lines
     public void refreshHistory() {
         List<String> historyList = MoodHistory.load();
-        historyContent.getChildren().clear(); // clear previous entries
+        historyContent.getChildren().clear();
 
         for (String line : historyList) {
             Label entryLabel = new Label("• " + line);
