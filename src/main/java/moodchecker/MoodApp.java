@@ -27,7 +27,7 @@ public class MoodApp extends Application {
         launch(args);
     }
 
-    // Determine current time of day
+
     public static String getTimeOfDay() {
         int hour = LocalTime.now().getHour();
         if (hour >= 5 && hour < 12) return "morning";
@@ -59,17 +59,17 @@ public class MoodApp extends Application {
         root.setPadding(new Insets(20));
         root.setAlignment(Pos.TOP_CENTER);
 
-        // Greeting label
+
         Label greetingLabel = new Label();
         greetingLabel.setFont(Font.font(24));
         greetingLabel.setTextFill(Color.WHITE);
 
-        // Dropdown for emotions (from your enum with emojis)
+
         ComboBox<Emotions> dropdown = new ComboBox<>();
         dropdown.getItems().addAll(Emotions.values());
         dropdown.setPrefWidth(220);
 
-        // Result label
+
         Label resultLabel = new Label();
         resultLabel.setWrapText(true);
         resultLabel.setFont(Font.font(16));
@@ -79,7 +79,7 @@ public class MoodApp extends Application {
         resultLabel.setEffect(new DropShadow(5, Color.BLACK));
         resultLabel.setMaxWidth(400);
 
-        // History VBox (color-coded)
+
         VBox historyContent = new VBox(5);
         historyContent.setFillWidth(true);
 
@@ -93,7 +93,7 @@ public class MoodApp extends Application {
         //List<String> loadedHistory = MoodHistory.load();
         // Will be displayed via refreshHistory
 
-        // Toggle history button
+
         Button toggleHistoryButton = new Button("📜 Show History");
         toggleHistoryButton.setStyle("-fx-background-color: #555555; -fx-text-fill: white;");
         toggleHistoryButton.setOnAction(e -> {

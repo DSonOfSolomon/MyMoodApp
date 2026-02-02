@@ -16,9 +16,7 @@ import java.util.Map;
 
 public class MoodAnalytics {
 
-    /**
-     * Opens a new window displaying a bar chart of moods in history.
-     */
+
     public static void showMoodTrends() {
         // Load history
         List<String> history = MoodHistory.load();

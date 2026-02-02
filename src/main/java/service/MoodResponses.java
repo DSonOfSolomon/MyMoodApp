@@ -14,7 +14,7 @@ public class MoodResponses {
     }
 
     private void buildResponses() {
-        // ===== Morning =====
+        // Morning
         Map<Emotions, String> morning = new HashMap<>();
         morning.put(Emotions.HAPPY, "Good morning! What a bright start! 🌞");
         morning.put(Emotions.CALM, "Morning calm sets a peaceful tone. 🕊️");
@@ -28,7 +28,7 @@ public class MoodResponses {
         morning.put(Emotions.OVERWHELMED, "Focus on one task at a time. ✅");
         responses.put("morning", morning);
 
-        // ===== Afternoon =====
+        // Afternoon
         Map<Emotions, String> afternoon = new HashMap<>();
         afternoon.put(Emotions.HAPPY, "Good afternoon! Keep the energy going! ☀️");
         afternoon.put(Emotions.CALM, "Afternoon calm can help you finish strong. 🕊️");
@@ -42,7 +42,7 @@ public class MoodResponses {
         afternoon.put(Emotions.OVERWHELMED, "Break big tasks into smaller steps. ✅");
         responses.put("afternoon", afternoon);
 
-        // ===== Evening =====
+        // Evening
         Map<Emotions, String> evening = new HashMap<>();
         evening.put(Emotions.HAPPY, "Oh definitely had an amazing day. Enjoy your evening! 🌇");
         evening.put(Emotions.CALM, "A calm evening eases your mind. 🕊️");
@@ -56,7 +56,7 @@ public class MoodResponses {
         evening.put(Emotions.OVERWHELMED, "Reflect and sort your thoughts. 📝");
         responses.put("evening", evening);
 
-        // ===== Night =====
+        // Night
         Map<Emotions, String> night = new HashMap<>();
         night.put(Emotions.HAPPY, "That's good to hear. Have a good night! Rest well and recharge! 🌙");
         night.put(Emotions.CALM, "Night calm can reset your mind. 🕊️");

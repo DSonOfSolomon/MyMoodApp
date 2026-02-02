@@ -15,7 +15,7 @@ public class MoodController {
 
     private final ComboBox<model.Emotions> dropdown;
     private final Label resultLabel;
-    private final VBox historyContent; // VBox for color-coded history
+    private final VBox historyContent;
     private final Label greetingLabel;
     private final VBox root;
     private final MoodResponses moodResponses;
@@ -53,10 +53,10 @@ public class MoodController {
         resultLabel.setText(response);
         resultLabel.setTextFill(getColor(emotion));
 
-        // Save mood with timestamp
+
         MoodHistory.save(timeOfDay, emotion);
 
-        // Refresh history display
+
         refreshHistory();
 
         // Update greeting & background dynamically
